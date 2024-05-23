@@ -16,9 +16,9 @@ const Navbar = () => {
 
     return (
         <div className='bg-white text-black'>
-            <div className='mx-auto max-w-7xl px-6 lg:px-8 flex items-center justify-between py-3'>
+            <div className='px-6 lg:px-8 flex items-center justify-between py-3'>
                 <Link href={"/"}>
-                    <h2 className="font-bold text-3xl">Blogify</h2>
+                    <h2 className="font-bold text-3xl">Flat Share</h2>
                 </Link>
                 <div className='flex items-center gap-8 font-medium'>
                     {

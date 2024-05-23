@@ -65,7 +65,7 @@ const SignUp = () => {
             <div className="w-full lg:w-[58%] h-full px-4 lg:px-0 overflow-auto flex items-center justify-center ">
                 <div className="max-w-lg mx-auto py-8 mt-10 lg:py-20 2xl:py-36">
                     <h2 className="text-2xl lg:text-4xl font-bold text-textBlack pb-1 lg:pb-2">
-                        Welcome to Blogify 👋🏾
+                        Welcome to Flat Share 👋🏾
                     </h2>
                     <p className="text-[#645D5D] text-xs lg:text-sm">
                         Already have an account?{" "}

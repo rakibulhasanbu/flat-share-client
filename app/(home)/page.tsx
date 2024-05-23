@@ -1,17 +1,6 @@
 import { config } from "@/config";
-import { formatDate } from "./utils/formateDate";
 
-const getPosts = async () => {
-  const res = await fetch(`${config.baseUrl}/blogs`, { cache: "no-cache" });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data")
-  }
-  return await res.json();
-}
-
-export default async function Home() {
-  const posts = await getPosts()
-
+export default function Home() {
   return (
     <div className="bg-white py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -22,7 +11,7 @@ export default async function Home() {
           </p>
         </div>
 
-        <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        {/* <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {posts?.data?.data?.map((post: any) => (
             <article key={post?.id} className="flex max-w-xl flex-col items-start justify-between">
               <img src={post?.imageUrl} alt="" className="rounded-xl max-h-56 w-full object-cover mb-4" />
@@ -47,7 +36,7 @@ export default async function Home() {
               </div>
             </article>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   )
