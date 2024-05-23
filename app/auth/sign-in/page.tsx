@@ -13,7 +13,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import AppFormInput from "@/app/components/ui/AppFormInput";
 
 interface FormData {
-    email: string;
+    usernameOrEmail: string;
     password: string;
 }
 
@@ -31,14 +31,14 @@ const Login = () => {
     const onSubmit: SubmitHandler<FormData> = (data) => {
         login(data).unwrap()
             .then((res: any) => {
+                console.log(res);
                 if (!res?.success) {
-
                     toast.error(res?.message || "something wrong");
                 } else {
 
-                    const user = verifyToken(res?.data?.token)
+                    const user = verifyToken(res?.data?.accessToken);
                     toast.success(res?.message || "Successfully log in");
-                    dispatch(setUser({ user, accessToken: res?.data?.token }))
+                    dispatch(setUser({ user, accessToken: res?.data?.accessToken }))
                     router.push(`/`);
                 }
             })
@@ -69,13 +69,12 @@ const Login = () => {
                         onSubmit={handleSubmit(onSubmit)}
                     >
                         <AppFormInput
-                            name="email"
+                            name="usernameOrEmail"
                             required={true}
                             register={register}
-                            type="email"
-                            label="Email address"
-                            placeholder="Type your Email address"
-                            error={errors.email}
+                            type="text"
+                            label="Username or email address"
+                            error={errors.usernameOrEmail}
                         />
 
                         <AppFormInput

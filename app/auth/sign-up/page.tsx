@@ -3,6 +3,9 @@
 import LeftSideAuthComponent from "@/app/components/shared/LeftSideAuthComponent";
 import AppFormInput from "@/app/components/ui/AppFormInput";
 import { useRegisterMutation } from "@/app/states/features/auth/authApi";
+import { setUser } from "@/app/states/features/auth/authSlice";
+import { useAppDispatch } from "@/app/states/hook";
+import { verifyToken } from "@/app/utils/verifyToken";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -11,6 +14,7 @@ import { toast } from "react-toastify";
 
 interface FormData {
     name: string;
+    username: string;
     email: string;
     password: string;
     confirmPassword: string;
@@ -18,6 +22,7 @@ interface FormData {
 }
 
 const SignUp = () => {
+    const dispatch = useAppDispatch();
     const {
         register,
         handleSubmit,
@@ -37,9 +42,9 @@ const SignUp = () => {
             toast.error(`Password does't match`);
             return;
         }
-        const { name, password, email } = data
+        const { name, password, email, username } = data
         const submittedData = {
-            password, email, name
+            password, email, name, username
         }
         registerUser(submittedData).unwrap()
             .then((res: any) => {
@@ -47,8 +52,10 @@ const SignUp = () => {
                 if (!res?.success) {
                     toast.error(res?.message || "something wrong");
                 } else {
+                    const user = verifyToken(res?.data?.accessToken)
                     toast.success(res?.message || "Successfully Registered");
-                    router.push(`/auth/sign-in`);
+                    dispatch(setUser({ user, accessToken: res?.data?.accessToken }))
+                    router.push(`/`);
                 }
             })
             .catch((res: any) => {
@@ -86,6 +93,15 @@ const SignUp = () => {
                             label="Full Name"
                             placeholder="Type your full name"
                             error={errors.name}
+                        />
+
+                        <AppFormInput
+                            name="username"
+                            required={true}
+                            register={register}
+                            type="text"
+                            label="Username"
+                            error={errors.username}
                         />
 
                         <AppFormInput
