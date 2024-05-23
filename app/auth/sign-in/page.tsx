@@ -88,7 +88,7 @@ const Login = () => {
                         />
 
                         <div className="flex items-center justify-end text-xs text-textGrey hover:text-primary lg:text-sm">
-                            {/* <Link to={"/auth/forgot-password"}> */}
+                            {/* <Link href={"/auth/forgot-password"}> */}
                             <p>Forgot Password?</p>{" "}
                             {/* </Link> */}
                         </div>
