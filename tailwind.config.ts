@@ -20,6 +20,9 @@ const config: Config = {
         red: "#E11C1B",
       },
     },
+    container: {
+      center: true,
+    },
     backgroundImage: {},
   },
   plugins: [],
