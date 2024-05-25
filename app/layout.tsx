@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "./components/shared/Navbar";
 import { Providers } from "./components/shared/Provider";
 import { ToastContainer } from "react-toastify";
+import Footer from "./components/shared/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          {children}
+          <Navbar />
+          <div>
+            {children}
+          </div>
+          <Footer />
           <ToastContainer
             position="bottom-right"
             autoClose={3000}

@@ -1,4 +1,3 @@
-import Navbar from "../components/shared/Navbar";
 
 const layout = ({
     children,
@@ -6,11 +5,8 @@ const layout = ({
     children: React.ReactNode;
 }>) => {
     return (
-        <div className=''>
-            <Navbar />
-            <div>
-                {children}
-            </div>
+        <div>
+            {children}
         </div>
     );
 };
