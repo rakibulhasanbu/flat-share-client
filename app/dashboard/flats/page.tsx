@@ -3,13 +3,13 @@
 
 import AppModal from "@/app/components/ui/AppModal";
 import AppTable from "@/app/components/ui/AppTable";
-import { useDeleteBlogMutation, useGetBlogsQuery, useGetMyBlogsQuery } from "@/app/states/features/blogs/blogApi";
+import { useDeleteFlatMutation, useGetMyFlatsQuery } from "@/app/states/features/flat/flatApi";
 import { formatDate } from "@/app/utils/formateDate";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 
-const Blogs = () => {
+const Flats = () => {
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState("")
 
@@ -31,28 +31,28 @@ const Blogs = () => {
         return queryString;
     }, [page, search]);
 
-    const infoQuery = useGetMyBlogsQuery(queryString);
+    const infoQuery = useGetMyFlatsQuery(queryString);
 
-    const [deleteBlog, { isError, error, isLoading, isSuccess }] = useDeleteBlogMutation();
+    const [deleteFlat, { isError, error, isLoading, isSuccess }] = useDeleteFlatMutation();
 
     useEffect(() => {
         if (isError) {
-            toast.error("Blog delete unsuccessful!");
+            toast.error("Flat delete unsuccessful!");
         } else if (!isLoading && isSuccess) {
-            toast.success('Blog deleted Successful!')
+            toast.success('Flat deleted Successful!')
         }
     }, [isError, error, isLoading, isSuccess])
 
     const columns = [
         {
-            title: 'Title',
-            dataIndex: 'title',
+            title: 'Location',
+            dataIndex: 'location',
             className: "min-w-[150px]",
-            render: (name: string, record: any) => {
+            render: (location: string, record: any) => {
                 return (
                     <div className='flex items-center gap-1'>
-                        <img src={record?.imageUrl} alt="" className="rounded-md object-cover w-16 h-10" />
-                        <p className="line-clamp-1">{name}</p>
+                        <img src={record?.photos[0]} alt="" className="rounded-md object-cover w-16 h-10" />
+                        <p className="line-clamp-1">{location}</p>
                     </div>
                 )
             }
@@ -94,16 +94,16 @@ const Blogs = () => {
             render: (_text: any, record: any) => {
                 return (
                     <div className='flex items-center gap-8'>
-                        <button className="text-xs font-medium px-4 py-1 rounded-full bg-[#E6E6E7] hover:text-gray-800 "><Link href={`/dashboard/edit-blog/${record?.id}`}>Edit Blog</Link></button>
+                        <button className="text-xs font-medium px-4 py-1 rounded-full bg-[#E6E6E7] hover:text-gray-800 "><Link href={`/dashboard/edit-Flat/${record?.id}`}>Edit Flat</Link></button>
 
                         <AppModal button={
                             <button className="text-xs text-white px-4 py-1 rounded-full w-full bg-red">Remove</button>}
                             cancelButtonTitle="No, Don’t"
                             primaryButtonTitle="Yes. Remove"
-                            primaryButtonAction={() => deleteBlog(record?.id)}
+                            primaryButtonAction={() => deleteFlat(record?.id)}
                         >
                             <div className='max-w-80'>
-                                <p className="text-center text-[#828282] pt-4 text-lg">Are you sure  Remove <span className="text-textDark font-medium">{record?.title}</span> from the blog list?</p>
+                                <p className="text-center text-[#828282] pt-4 text-lg">Are you sure  Remove this flat from the Flat list?</p>
                             </div>
                         </AppModal>
                     </div>
@@ -119,10 +119,10 @@ const Blogs = () => {
                 infoQuery={infoQuery}
                 setPage={setPage}
                 onInputChange={(text) => setSearch(text)}
-                headerText="Blogs List"
+                headerText="Flats List"
                 button={
-                    <Link href={"/dashboard/add-blog"}>
-                        <button className="roundedBtn">Add New Blog</button>
+                    <Link href={"/dashboard/add-flat"}>
+                        <button className="roundedBtn">Add New Flat</button>
                     </Link>
                 }
             />
@@ -130,4 +130,4 @@ const Blogs = () => {
     );
 };
 
-export default Blogs;
+export default Flats;

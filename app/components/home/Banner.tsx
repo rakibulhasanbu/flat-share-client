@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const Banner = () => {
@@ -16,9 +17,11 @@ const Banner = () => {
                 <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
                     Welcome to our flat-sharing community! Whether you’re a student, young professional, or digital nomad, we’ve got the ideal space waiting for you. Discover shared apartments, cozy rooms, and friendly flatmates. It’s more than just a place to stay—it’s where memories are made.
                 </p>
-                <button className="appBtn">
-                    Share Your Flat
-                </button>
+                <Link href={'/add-flat'}>
+                    <button className="appBtn">
+                        Share Your Flat
+                    </button>
+                </Link>
             </div>
             <ShuffleGrid />
         </section>

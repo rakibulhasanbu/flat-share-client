@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
@@ -24,7 +26,7 @@ const AppFormInput = ({ label, defaultValue, readOnly, error, type, required, na
                     {defaultValue}
                 </div>
                 :
-                <>
+                <div>
                     <div className="relative float-label-input w-full min-w-[200px]">
                         <input
                             // {...register(name, { ...(required && { required: true }) })}
@@ -46,13 +48,15 @@ const AppFormInput = ({ label, defaultValue, readOnly, error, type, required, na
                                 <IoEyeOutline onClick={() => setShow(true)} className="absolute right-4 text-lg 2xl:text-xl cursor-pointer 2xl:right-4 top-3.5 2xl:top-4" />
                             )}
                     </div>
-                    {
-                        error &&
-                        <span className="text-xs tracking-wide text-red">
-                            {label} field is required
-                        </span>
-                    }
-                </>
+                    <>
+                        {
+                            error &&
+                            <span className="text-xs tracking-wide text-red">
+                                {label} field is required
+                            </span>
+                        }
+                    </>
+                </div>
             }
         </>
     );

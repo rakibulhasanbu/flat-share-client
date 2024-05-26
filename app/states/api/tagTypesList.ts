@@ -1,5 +1,5 @@
 export enum tagTypes {
   user = "user",
-  blog = "blog",
+  flat = "flat",
 }
 export const tagTypesList = Object.values(tagTypes);

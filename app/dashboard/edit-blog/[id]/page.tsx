@@ -3,7 +3,7 @@
 
 import AppFormInput from "@/app/components/ui/AppFormInput";
 import AppLoading from "@/app/components/ui/AppLoading";
-import { useGetBlogByIdQuery, useUpdatedBlogMutation } from "@/app/states/features/blogs/blogApi";
+import { useGetBlogByIdQuery, useUpdatedBlogMutation } from "@/app/states/features/flat/blogApi";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";

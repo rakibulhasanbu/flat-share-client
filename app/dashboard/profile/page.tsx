@@ -2,7 +2,6 @@
 
 import AppFormInput from "@/app/components/ui/AppFormInput";
 import AppLoading from "@/app/components/ui/AppLoading";
-import { } from "@/app/states/features/blogs/blogApi";
 import { useEditProfileMutation, useGetProfileQuery } from "@/app/states/features/user/userApi";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";

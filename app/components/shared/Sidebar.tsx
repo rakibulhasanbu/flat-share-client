@@ -23,15 +23,15 @@ const Sidebar = () => {
             relativePath: "",
         },
         {
-            path: "/dashboard/blogs",
+            path: "/dashboard/flats",
             Icon: TbLogs,
-            label: "Blogs",
+            label: "Flats",
             relativePath: "",
         },
         {
-            path: "/dashboard/add-blog",
+            path: "/dashboard/add-flat",
             Icon: MdPostAdd,
-            label: "Add Blog",
+            label: "Add Flat",
             relativePath: "",
         },
     ];
