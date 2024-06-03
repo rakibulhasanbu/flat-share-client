@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -6,23 +7,14 @@ const Footer = () => {
             <footer className="relative z-10 bg-gray-900 pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
                 <div className="container">
                     <div className="-mx-4 flex flex-wrap">
-                        <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
+                        <div className="w-full px-4 sm:w-2/3 lg:w-4/12">
                             <div className="mb-10 w-full">
-                                <a href="/#" className="mb-6 inline-block max-w-[160px]">
-                                    <img
-                                        src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo.svg"
-                                        alt="logo"
-                                        className="max-w-full dark:hidden"
-                                    />
-                                    <img
-                                        src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
-                                        alt="logo"
-                                        className="max-w-full hidden dark:block"
-                                    />
-                                </a>
-                                <p className="mb-7 text-base text-gray-400 dark:text-dark-6">
-                                    Sed ut perspiciatis undmnis is iste natus error sit amet
-                                    voluptatem totam rem aperiam.
+                                <Link href={"/"} className="flex items-center gap-2 pb-12">
+                                    <img src="/assets/logo.png" alt="" className="size-9" />
+                                    <h2 className="font-bold text-3xl text-white">Flat Share</h2>
+                                </Link>
+                                <p className="mb-7 max-w-[75%] text-base text-gray-400 dark:text-dark-6">
+                                    Find your perfect flat! Explore listings, connect with roommates, and discover cozy spaces. Whether you are renting or sharing, our platform makes it easy to find your ideal home sweet home.
                                 </p>
                                 <p className="flex items-center text-sm font-medium text-dark dark:text-white">
                                     <span className="mr-3 text-primary">
@@ -59,26 +51,27 @@ const Footer = () => {
                             </div>
                         </div>
 
-                        <LinkGroup header="Resources">
-                            <NavLink link="/#" label="SaaS Development" />
-                            <NavLink link="/#" label="Our Products" />
-                            <NavLink link="/#" label="User Flow" />
-                            <NavLink link="/#" label="User Strategy" />
+                        <LinkGroup header="Explore Flats">
+                            <NavLink link="/#" label="Find Your Perfect Flat" />
+                            <NavLink link="/#" label="Browse Listings" />
+                            <NavLink link="/#" label="Connect with Roommates" />
+                            <NavLink link="/#" label="Discover Cozy Spaces" />
                         </LinkGroup>
-                        <LinkGroup header="Company">
-                            <NavLink link="/#" label="About TailGrids" />
+                        <LinkGroup header="About Us">
+                            <NavLink link="/#" label="Learn About Our Platform" />
                             <NavLink link="/#" label="Contact & Support" />
-                            <NavLink link="/#" label="Success History" />
-                            <NavLink link="/#" label="Setting & Privacy" />
+                            <NavLink link="/#" label="Success Stories" />
+                            <NavLink link="/#" label="Privacy Policy" />
                         </LinkGroup>
                         <LinkGroup header="Quick Links">
-                            <NavLink link="/#" label="Premium Support" />
+                            <NavLink link="/#" label="Premium Services" />
                             <NavLink link="/#" label="Our Services" />
-                            <NavLink link="/#" label="Know Our Team" />
-                            <NavLink link="/#" label="Download App" />
+                            <NavLink link="/#" label="Meet the Team" />
+                            <NavLink link="/#" label="Download the App" />
                         </LinkGroup>
 
-                        <div className="w-full px-4 sm:w-1/2 lg:w-3/12">
+
+                        <div className="w-full px-4 sm:w-1/2 lg:w-2/12">
                             <div className="mb-10 w-full">
                                 <h4 className="mb-9 text-lg font-semibold text-dark dark:text-white">
                                     Follow Us On
@@ -138,7 +131,7 @@ const Footer = () => {
                                     </a>
                                 </div>
                                 <p className="text-base text-gray-400 dark:text-dark-6">
-                                    &copy; 2025 TailGrids
+                                    &copy; 2025 FlatShare
                                 </p>
                             </div>
                         </div>

@@ -5,7 +5,6 @@ import Newsletter from "../components/home/Newslatter";
 import Testimonials from "../components/home/Testimonials";
 import Trasted from "../components/home/Trasted";
 import PromoSection from "../components/home/PromoSection";
-import Flats from "../components/home/Flats";
 import FlatList from "../components/home/FlatList";
 
 export default function Home() {
@@ -14,7 +13,6 @@ export default function Home() {
       <Banner />
       <FlatList />
       <FeaturedSection />
-      <Flats />
       <CTASection />
       <Testimonials />
       <Trasted />

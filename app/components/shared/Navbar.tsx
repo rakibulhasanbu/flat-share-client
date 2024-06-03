@@ -28,12 +28,12 @@ const Navbar = () => {
 
     return (
         <div className='bg-white text-black'>
-            <div className='container px-6 lg:px-8 flex items-center justify-between py-3'>
+            <div className='container px-6 lg:px-8 flex items-center justify-between py-3 md:py-6'>
                 <Link href={"/"} className="flex items-center gap-2">
                     <img src="/assets/logo.png" alt="" className="size-9" />
                     <h2 className="font-bold text-3xl">Flat Share</h2>
                 </Link>
-                <div className='flex items-center gap-8 font-medium'>
+                <div className='flex items-center text-lg gap-8 font-medium'>
                     {navLinks?.map((nav) => (
                         <Link key={nav.label} href={nav.path}>
                             <h3 >{nav.label}</h3>

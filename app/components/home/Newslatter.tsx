@@ -4,14 +4,14 @@ import { MdOutlineFrontHand } from "react-icons/md";
 
 export default function Newsletter() {
     return (
-        <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
+        <div className="relative isolate overflow-hidden bg-gray-900 rounded-3xl py-16 sm:py-24 lg:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
                     <div className="max-w-xl lg:max-w-lg">
                         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Subscribe to our newsletter.</h2>
                         <p className="mt-4 text-lg leading-8 text-gray-300">
-                            Nostrud amet eu ullamco nisi aute in ad minim nostrud adipisicing velit quis. Duis tempor incididunt
-                            dolore.
+                            Stay in the loop! Subscribe to receive the latest flat listings, roommate updates, and exclusive offers. Join our community and find your perfect home today.
+
                         </p>
                         <div className="mt-6 flex max-w-md gap-x-4">
                             <label htmlFor="email-address" className="sr-only">
@@ -39,18 +39,18 @@ export default function Newsletter() {
                             <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
                                 <FaRegCalendarAlt className="h-6 w-6 text-white" aria-hidden="true" />
                             </div>
-                            <dt className="mt-4 font-semibold text-white">Weekly articles</dt>
+                            <dt className="mt-4 font-semibold text-white">Weekly Update</dt>
                             <dd className="mt-2 leading-7 text-gray-400">
-                                Non laboris consequat cupidatat laborum magna. Eiusmod non irure cupidatat duis commodo amet.
+                                Explore our latest flat listings, from cozy studios to spacious shared apartments. Your perfect home awaits!
                             </dd>
                         </div>
                         <div className="flex flex-col items-start">
                             <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
                                 <MdOutlineFrontHand className="h-6 w-6 text-white" aria-hidden="true" />
                             </div>
-                            <dt className="mt-4 font-semibold text-white">No spam</dt>
+                            <dt className="mt-4 font-semibold text-white">Upcoming Events</dt>
                             <dd className="mt-2 leading-7 text-gray-400">
-                                Officia excepteur ullamco ut sint duis proident non adipisicing. Voluptate incididunt anim.
+                                Join our community events this week! From virtual house tours to roommate meetups, there is something for everyone.
                             </dd>
                         </div>
                     </dl>
