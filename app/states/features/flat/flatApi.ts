@@ -35,11 +35,11 @@ const flatApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.flat],
     }),
 
-    updatedBlog: builder.mutation({
+    updatedFlat: builder.mutation({
       query: (updatedData) => ({
-        url: `/blog/${updatedData.id}`,
+        url: `/flats/${updatedData.id}`,
         method: "PUT",
-        body: updatedData.BlogData,
+        body: updatedData.FlatData,
       }),
       invalidatesTags: [tagTypes.flat],
     }),
@@ -59,6 +59,6 @@ export const {
   useGetMyFlatsQuery,
   useGetFlatByIdQuery,
   useAddFlatMutation,
-  useUpdatedBlogMutation,
+  useUpdatedFlatMutation,
   useDeleteFlatMutation,
 } = flatApi;

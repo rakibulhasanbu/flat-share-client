@@ -31,19 +31,13 @@ const Login = () => {
     const onSubmit: SubmitHandler<FormData> = (data) => {
         login(data).unwrap()
             .then((res: any) => {
-                console.log(res);
-                if (!res?.success) {
-                    toast.error(res?.message || "something wrong");
-                } else {
-
-                    const user = verifyToken(res?.data?.accessToken);
-                    toast.success(res?.message || "Successfully log in");
-                    dispatch(setUser({ user, accessToken: res?.data?.accessToken }))
-                    router.push(`/`);
-                }
+                const user = verifyToken(res?.data?.accessToken);
+                toast.success(res?.message || "Successfully log in");
+                dispatch(setUser({ user, accessToken: res?.data?.accessToken }))
+                router.push(`/`);
             })
             .catch((res: any) => {
-                toast.error(res?.data?.errorMessage || "something went wrong");
+                toast.error(res?.data?.message || "something went wrong");
             });
     };
 

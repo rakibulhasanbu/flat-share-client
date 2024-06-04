@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MdDashboard, MdPostAdd } from "react-icons/md";
 import { TbLogs } from "react-icons/tb";
+import { FaUsers } from "react-icons/fa";
 
 const Sidebar = () => {
     const pathname = usePathname();
@@ -16,16 +17,17 @@ const Sidebar = () => {
             label: "dashboard",
             relativePath: "",
         },
-        {
-            path: "/dashboard/profile",
-            Icon: CgProfile,
-            label: "Profile",
-            relativePath: "",
-        },
+
         {
             path: "/dashboard/flats",
             Icon: TbLogs,
             label: "Flats",
+            relativePath: "",
+        },
+        {
+            path: "/dashboard/manage-user",
+            Icon: FaUsers,
+            label: "Users",
             relativePath: "",
         },
         {

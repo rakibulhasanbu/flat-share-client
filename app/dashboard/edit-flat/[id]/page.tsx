@@ -4,14 +4,15 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { config } from "@/config";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { useRouter } from "next/navigation";
-import { useAddFlatMutation } from "@/app/states/features/flat/flatApi";
+import { useParams, useRouter } from "next/navigation";
+import { useGetFlatByIdQuery, useUpdatedFlatMutation } from "@/app/states/features/flat/flatApi";
 import Link from "next/link";
 import { IoArrowBackOutline } from "react-icons/io5";
 import AppLoading from "@/app/components/ui/AppLoading";
 import AppFormInput from "@/app/components/ui/AppFormInput";
+import { isArray } from "util";
 
 type TInputs = {
   location: string;
@@ -24,31 +25,40 @@ type TInputs = {
   totalBedrooms: string;
 };
 
-const AddFlat = () => {
+const UpdateFlat = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [photos, setPhotos] = useState<string[]>([]);
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<TInputs>();
+  const { id } = useParams();
+  const [updateFlat, { isLoading }] = useUpdatedFlatMutation();
+  const { data } = useGetFlatByIdQuery(id)
 
-  const [addFlat, { isLoading }] = useAddFlatMutation();
+  const [photos, setPhotos] = useState<string[]>([]);
 
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
-    const updateAmenities = data?.amenities.split(/\s*,\s*/);
+    let updateAmenities;
+    if (!isArray(data?.amenities)) {
+      updateAmenities = data?.amenities?.split(/\s*,\s*/);
+    }
 
     const submitData = {
-      ...data, photos, amenities: updateAmenities
+      id, FlatData: {
+        ...data, photos, amenities: updateAmenities === undefined ? data?.amenities : updateAmenities
+      }
     }
-    console.log(submitData);
-    await addFlat(submitData).unwrap().then((res: { success: any; message: any; }) => {
-      console.log(res);
+
+    await updateFlat(submitData).unwrap().then((res: { success: any; message: any; }) => {
+
       toast.success("Blog are added successfully!", { toastId: 1 });
-      router.push('/');
+      router.push('/dashboard/flats');
     }).catch((res: { success: any; message: any; }) => {
-      console.log(res);
+
       toast.error(res.message || "Something went wrong", { toastId: 1 });
     });
   };
@@ -95,6 +105,18 @@ const AddFlat = () => {
     }
   }
 
+  useEffect(() => {
+    setValue("advanceAmount", data?.data?.advanceAmount);
+    setValue("description", data?.data?.description);
+    setValue("amenities", data?.data?.amenities);
+    setValue("amount", data?.data?.amount);
+    setValue("location", data?.data?.location);
+    setValue("squareFeet", data?.data?.squareFeet);
+    setValue("totalBedrooms", data?.data?.totalBedrooms);
+    setValue("totalRooms", data?.data?.totalRooms);
+    setPhotos(data?.data?.photos)
+  }, [data, setValue])
+
   return (
     <>
       <Link
@@ -111,7 +133,7 @@ const AddFlat = () => {
         isLoading ? <AppLoading />
           :
           <div className="bg-[#F8F8F8] p-3 md:p-4 rounded-2xl mt-4">
-            <h1 className="md:text-xl font-medium">Add New Flat</h1>
+            <h1 className="md:text-xl font-medium">Edit Flat</h1>
             <form className="space-y-2 md:space-y-4 pt-4 pb-2" onSubmit={handleSubmit(onSubmit)}>
 
               <div className='flex items-center justify-center py-6'>
@@ -232,7 +254,7 @@ const AddFlat = () => {
                   </button>
                 ) : (
                   <button type="submit" className="roundedBtn cursor-pointer">
-                    Add Flat
+                    Update Flat
                   </button>
                 )}
               </div>
@@ -243,4 +265,4 @@ const AddFlat = () => {
   );
 };
 
-export default AddFlat;
+export default UpdateFlat;

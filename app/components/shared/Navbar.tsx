@@ -28,7 +28,7 @@ const Navbar = () => {
 
     return (
         <div className='bg-white text-black'>
-            <div className='container px-6 lg:px-8 flex items-center justify-between py-3 md:py-6'>
+            <div className='container px-4 lg:px-0 flex items-center justify-between py-3 md:py-6'>
                 <Link href={"/"} className="flex items-center gap-2">
                     <img src="/assets/logo.png" alt="" className="size-9" />
                     <h2 className="font-bold text-3xl">Flat Share</h2>

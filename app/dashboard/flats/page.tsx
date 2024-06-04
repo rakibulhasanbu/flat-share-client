@@ -69,11 +69,11 @@ const Flats = () => {
         },
         {
             title: 'Author Name',
-            dataIndex: 'author',
+            dataIndex: 'postedBy',
             className: "min-w-[105px]",
-            render: (author: any) => {
+            render: (postedBy: any) => {
                 return (
-                    <p className="line-clamp-1">{author?.name}</p>
+                    <p className="line-clamp-1">{postedBy?.name}</p>
                 )
             }
         },
@@ -94,7 +94,7 @@ const Flats = () => {
             render: (_text: any, record: any) => {
                 return (
                     <div className='flex items-center gap-8'>
-                        <button className="text-xs font-medium px-4 py-1 rounded-full bg-[#E6E6E7] hover:text-gray-800 "><Link href={`/dashboard/edit-Flat/${record?.id}`}>Edit Flat</Link></button>
+                        <button className="text-xs font-medium px-4 py-1 rounded-full bg-[#E6E6E7] hover:text-gray-800 "><Link href={`/dashboard/edit-flat/${record?.id}`}>Edit Flat</Link></button>
 
                         <AppModal button={
                             <button className="text-xs text-white px-4 py-1 rounded-full w-full bg-red">Remove</button>}

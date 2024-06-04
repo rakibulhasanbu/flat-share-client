@@ -1,10 +1,16 @@
 'use client'
 
+import { useAppSelector } from "@/app/states/hook";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 const Banner = () => {
+    const { user } = useAppSelector(state => state.auth);
+    const handleShareFlat = () => {
+        return toast.error("Please log in and try again.", { toastId: 1 })
+    }
     return (
         <section className="px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-16">
             <div>
@@ -17,11 +23,19 @@ const Banner = () => {
                 <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
                     Welcome to our flat-sharing community! Whether you’re a student, young professional, or digital nomad, we’ve got the ideal space waiting for you. Discover shared apartments, cozy rooms, and friendly flatmates. It’s more than just a place to stay—it’s where memories are made.
                 </p>
-                <Link href={'/add-flat'}>
-                    <button className="appBtn">
+                {user?.email ?
+                    <Link href={'/add-flat'}>
+                        <button className="appBtn">
+                            Share Your Flat
+                        </button>
+                    </Link>
+                    :
+
+                    <button onClick={handleShareFlat} className="appBtn">
                         Share Your Flat
                     </button>
-                </Link>
+
+                }
             </div>
             <ShuffleGrid />
         </section>

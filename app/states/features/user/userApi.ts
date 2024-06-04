@@ -11,6 +11,14 @@ export const userApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.user],
     }),
+    getUsers: builder.query({
+      query: () => {
+        return {
+          url: `/users`,
+        };
+      },
+      providesTags: [tagTypes.user],
+    }),
 
     editProfile: builder.mutation({
       query: (info) => {
@@ -22,11 +30,12 @@ export const userApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [tagTypes.user],
     }),
-    deleteUser: builder.mutation({
-      query: (id) => {
+    editUser: builder.mutation({
+      query: (info) => {
         return {
-          url: `/users/${id}`,
-          method: "DELETE",
+          url: `/user`,
+          method: "PUT",
+          body: info,
         };
       },
       invalidatesTags: [tagTypes.user],
@@ -36,6 +45,7 @@ export const userApi = baseApi.injectEndpoints({
 
 export const {
   useGetProfileQuery,
+  useGetUsersQuery,
   useEditProfileMutation,
-  useDeleteUserMutation,
+  useEditUserMutation,
 } = userApi;
