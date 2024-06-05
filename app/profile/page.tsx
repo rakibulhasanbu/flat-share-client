@@ -55,7 +55,7 @@ const Page = () => {
     }, [data, setValue]);
 
     return (
-        <ProtectedRoute>
+        <ProtectedRoute roles={["USER", "ADMIN"]}>
             <div className='container md:py-4 2xl:py-20 '>
                 <h1 className="mt-2 text-3xl font-bold text-center capitalize pb-12 tracking-tight text-gray-900 md:text-4xl">{data?.data?.username} Profile</h1>
                 <form
