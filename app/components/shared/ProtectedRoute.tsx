@@ -1,17 +1,34 @@
 import { useCurrentToken } from "@/app/states/features/auth/authSlice";
 import { useAppSelector } from "@/app/states/hook";
+import { TUserRole } from "@/app/types";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
 
 interface TProtectedRouteProps {
-    children: any
+    children: any;
+    role: TUserRole
 }
 
-const ProtectedRoute = ({ children }: TProtectedRouteProps) => {
+interface CustomJwtPayload extends JwtPayload {
+    email: string;
+    exp: number;
+    iat: number;
+    role: string;
+    userId: string;
+    userName: string;
+}
+
+
+const ProtectedRoute = ({ children, role }: TProtectedRouteProps) => {
     const router = useRouter()
     const token = useAppSelector(useCurrentToken);
 
     if (!token) {
+        return router.push("/")
+    }
+    const decodedToken = jwtDecode(token) as CustomJwtPayload;
+
+    if (decodedToken?.role !== role) {
         return router.push("/")
     }
 

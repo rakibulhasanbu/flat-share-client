@@ -10,6 +10,7 @@ type Props = {
   loadingComponent?: React.ReactNode;
   notAllowIsFetching?: boolean;
   isEmptyComponentHave?: boolean;
+  dataCount?: number;
 };
 
 const AppRenderReduxData = ({
@@ -18,10 +19,16 @@ const AppRenderReduxData = ({
   renderErrorComponent,
   loadingComponent,
   notAllowIsFetching,
-  isEmptyComponentHave
+  isEmptyComponentHave,
+  dataCount
 }: Props) => {
   const { data, isFetching, isLoading, isError, error } = queryData;
 
+  // let getData = data?.data
+  // if (dataCount === 3) {
+  //   return getData = data?.data?.data;
+  // }
+  // console.log(getData, dataCount);
   let content;
 
   const shouldFetch = notAllowIsFetching === true ? false : isFetching;
@@ -35,10 +42,10 @@ const AppRenderReduxData = ({
       <AppErrorComponent />
     );
 
-  } else if ((data as any)?.data && isEmptyComponentHave) {
-    content = showData(data?.data);
-  } else if ((data as any)?.data?.length > 0) {
-    content = showData(data);
+  } else if ((dataCount === 3 ? data?.data?.data : data?.data) && isEmptyComponentHave) {
+    content = showData((dataCount === 3 ? data?.data?.data : data?.data));
+  } else if ((dataCount === 3 ? data?.data?.data : data?.data)?.length > 0) {
+    content = showData((dataCount === 3 ? data?.data : data));
   } else {
     content = (
       <Empty description="No Data Found" className="min-h-[70dvh] flex flex-col text-xl font-medium gap-4 items-center justify-center" />

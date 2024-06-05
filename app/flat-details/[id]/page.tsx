@@ -1,11 +1,12 @@
 'use client'
 
-import { useGetFlatByIdQuery } from '@/app/states/features/flat/flatApi';
+import AppFormInput from '@/app/components/ui/AppFormInput';
+import { useBookingFlatMutation, useGetFlatByIdQuery } from '@/app/states/features/flat/flatApi';
 import { Carousel } from 'antd';
-import { useParams } from 'next/navigation';
-import { useState } from 'react'
-import { FaStar } from "react-icons/fa";
+import { useParams, useRouter } from 'next/navigation';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { ImSpinner2 } from 'react-icons/im';
+import { toast } from 'react-toastify';
 
 const product = {
     name: 'Basic Tee 6-Pack',
@@ -59,13 +60,38 @@ const product = {
     details:
         'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
 }
-const reviews = { href: '#', average: 4, totalCount: 117 }
+
+type TInputs = {
+    message: string;
+};
 
 export default function FlatDetails() {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<TInputs>();
 
+    const router = useRouter();
     const { id } = useParams();
 
     const { data, isLoading, isError } = useGetFlatByIdQuery(id);
+    const [bookingFlat, { isLoading: flatBookingLoading }] = useBookingFlatMutation()
+
+    const onSubmit: SubmitHandler<TInputs> = async (data) => {
+        const submitData = {
+            ...data, flatId: id
+        }
+
+        await bookingFlat(submitData).unwrap().then((res: { success: any; message: any; }) => {
+            console.log(res);
+            toast.success("Booking are added successfully!", { toastId: 1 });
+            router.push('/');
+        }).catch((res: { success: any; message: any; }) => {
+            console.log(res);
+            toast.error(res.message || "Something went wrong", { toastId: 1 });
+        });
+    }
 
     if (isLoading || isError) {
         return (
@@ -99,14 +125,19 @@ export default function FlatDetails() {
                     <div className="mt-4 lg:row-span-3 lg:mt-0">
                         <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
 
-                        <form className="mt-10">
-
+                        <form className="mt-10" onSubmit={handleSubmit(onSubmit)}>
+                            <AppFormInput
+                                name='message'
+                                label='Message'
+                                register={register}
+                                type='text'
+                            />
 
                             <button
                                 type="submit"
-                                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white hover:bg-primary"
                             >
-                                Add to bag
+                                Booking Flat
                             </button>
                         </form>
                     </div>

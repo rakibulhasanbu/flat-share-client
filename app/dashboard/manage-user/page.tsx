@@ -33,7 +33,7 @@ const ManageUser = () => {
         });
     }
     const handleChangeRole = async (id: string, value: any) => {
-        console.log(value);
+
         const updateData = {
             id, role: value
         }

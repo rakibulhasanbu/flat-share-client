@@ -2,10 +2,11 @@
 
 import ProtectedRoute from "../components/shared/ProtectedRoute";
 import Sidebar from "../components/shared/Sidebar";
+import { USER_ROLE } from "../types";
 
 const Layout = ({ children }: { children: any }) => {
     return (
-        <ProtectedRoute>
+        <ProtectedRoute role={USER_ROLE.ADMIN}>
             <div className='py-2 lg:py-5 flex'>
                 <div className='hidden lg:block w-0 lg:w-1/6 h-[82.5dvh] overflow-auto '>
                     <Sidebar />

@@ -19,6 +19,22 @@ const flatApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.flat],
     }),
 
+    getMyBookingFlats: builder.query({
+      query: () => ({
+        url: `/booking-requests-my`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.flat],
+    }),
+
+    getBookingFlats: builder.query({
+      query: () => ({
+        url: `/booking-requests`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.flat],
+    }),
+
     getFlatById: builder.query({
       query: (id) => ({
         url: `/flat/${id}`,
@@ -31,6 +47,24 @@ const flatApi = baseApi.injectEndpoints({
         url: "/flats",
         method: "POST",
         body: data,
+      }),
+      invalidatesTags: [tagTypes.flat],
+    }),
+
+    bookingFlat: builder.mutation({
+      query: (data) => ({
+        url: "/booking-applications",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: [tagTypes.flat],
+    }),
+
+    updateBookingFlat: builder.mutation({
+      query: (updatedData) => ({
+        url: `/booking-requests/${updatedData.id}`,
+        method: "PUT",
+        body: updatedData.BookingFlatData,
       }),
       invalidatesTags: [tagTypes.flat],
     }),
@@ -60,5 +94,9 @@ export const {
   useGetFlatByIdQuery,
   useAddFlatMutation,
   useUpdatedFlatMutation,
+  useUpdateBookingFlatMutation,
   useDeleteFlatMutation,
+  useGetMyBookingFlatsQuery,
+  useGetBookingFlatsQuery,
+  useBookingFlatMutation,
 } = flatApi;

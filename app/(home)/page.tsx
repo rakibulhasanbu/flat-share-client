@@ -4,7 +4,6 @@ import CTASection from "../components/home/Cta";
 import Newsletter from "../components/home/Newslatter";
 import Testimonials from "../components/home/Testimonials";
 import Trasted from "../components/home/Trasted";
-import PromoSection from "../components/home/PromoSection";
 import FlatList from "../components/home/FlatList";
 
 export default function Home() {
@@ -16,7 +15,6 @@ export default function Home() {
       <CTASection />
       <Testimonials />
       <Trasted />
-      <PromoSection />
       <Newsletter />
     </div>
   )

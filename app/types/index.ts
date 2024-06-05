@@ -5,7 +5,7 @@ interface TUser {
   role: string;
 }
 
-interface TFlat {
+export interface TFlat {
   id: string;
   location: string;
   description: string;
@@ -21,3 +21,16 @@ interface TFlat {
   updatedAt: string;
   postedById: string;
 }
+
+export const USER_ROLE = {
+  ADMIN: "ADMIN",
+  USER: "USER",
+} as const;
+
+export const BookingStatus = {
+  PENDING: "PENDING",
+  APPROVED: "APPROVED",
+  REJECTED: "REJECTED",
+};
+
+export type TUserRole = keyof typeof USER_ROLE;

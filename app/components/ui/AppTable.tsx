@@ -16,6 +16,7 @@ type TTableProps = {
   onInputChange?: (text: string) => void;
   setPage?: (value: number) => void;
   tabs?: ReactNode;
+  dataCount?: number
 };
 
 const AppTable = ({
@@ -27,7 +28,8 @@ const AppTable = ({
   columns,
   onInputChange,
   setPage,
-  tabs
+  tabs,
+  dataCount = 2
 }: TTableProps) => {
 
   const [input, setInput] = useState("");
@@ -71,12 +73,13 @@ const AppTable = ({
       <div className='overflow-x-auto'>
         {infoQuery && (
           <AppRenderReduxData
+            dataCount={dataCount}
             loadingComponent={
               <AppTableSkeleton />
             }
             queryData={infoQuery}
             showData={(data) => {
-              console.warn(data);
+              // console.warn(data);
               return (
                 <Table
                   showHeader={header}

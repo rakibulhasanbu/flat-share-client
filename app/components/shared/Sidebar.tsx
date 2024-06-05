@@ -25,6 +25,12 @@ const Sidebar = () => {
             relativePath: "",
         },
         {
+            path: "/dashboard/booking-flats",
+            Icon: TbLogs,
+            label: "Requested Flats",
+            relativePath: "",
+        },
+        {
             path: "/dashboard/manage-user",
             Icon: FaUsers,
             label: "Users",

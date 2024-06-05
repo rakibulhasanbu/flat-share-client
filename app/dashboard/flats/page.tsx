@@ -3,7 +3,7 @@
 
 import AppModal from "@/app/components/ui/AppModal";
 import AppTable from "@/app/components/ui/AppTable";
-import { useDeleteFlatMutation, useGetMyFlatsQuery } from "@/app/states/features/flat/flatApi";
+import { useDeleteFlatMutation, useGetFlatsQuery, useGetMyFlatsQuery } from "@/app/states/features/flat/flatApi";
 import { formatDate } from "@/app/utils/formateDate";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -15,7 +15,6 @@ const Flats = () => {
 
     const queryString = useMemo(() => {
         const info = {
-            role: "user",
             brand: "",
             limit: 10,
             page,
@@ -31,7 +30,7 @@ const Flats = () => {
         return queryString;
     }, [page, search]);
 
-    const infoQuery = useGetMyFlatsQuery(queryString);
+    const infoQuery = useGetFlatsQuery(queryString);
 
     const [deleteFlat, { isError, error, isLoading, isSuccess }] = useDeleteFlatMutation();
 
@@ -118,6 +117,7 @@ const Flats = () => {
                 columns={columns}
                 infoQuery={infoQuery}
                 setPage={setPage}
+                dataCount={3}
                 onInputChange={(text) => setSearch(text)}
                 headerText="Flats List"
                 button={

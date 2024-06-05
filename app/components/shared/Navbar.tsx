@@ -2,6 +2,7 @@
 
 import { logOut } from "@/app/states/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/app/states/hook";
+import { USER_ROLE } from "@/app/types";
 import { link } from "fs";
 import Link from "next/link";
 import { toast } from "react-toastify";
@@ -9,7 +10,6 @@ import { toast } from "react-toastify";
 const Navbar = () => {
     const { user } = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
-
     const handleLogout = () => {
         dispatch(logOut());
         toast.success("Logout successfully");
@@ -36,19 +36,25 @@ const Navbar = () => {
                 <div className='flex items-center text-lg gap-8 font-medium'>
                     {navLinks?.map((nav) => (
                         <Link key={nav.label} href={nav.path}>
-                            <h3 >{nav.label}</h3>
+                            {nav.label}
                         </Link>
                     ))}
                     {
                         user?.email &&
-                        <Link href={'/profile'}>
-                            <h3>My Profile</h3>
+                        <Link href={'/requested-flats'}>
+                            My Requested Flats
                         </Link>
                     }
                     {
                         user?.email &&
+                        <Link href={'/profile'}>
+                            My Profile
+                        </Link>
+                    }
+                    {
+                        user?.role === "ADMIN" &&
                         <Link href={'/dashboard'}>
-                            <h3>Dashboard</h3>
+                            Dashboard
                         </Link>
                     }
                     {/* <h3>{user?.userName}</h3> */}
