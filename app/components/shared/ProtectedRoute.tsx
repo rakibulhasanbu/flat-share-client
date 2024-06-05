@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 interface TProtectedRouteProps {
     children: any;
-    role: TUserRole
+    roles: any[]
 }
 
 interface CustomJwtPayload extends JwtPayload {
@@ -19,7 +19,7 @@ interface CustomJwtPayload extends JwtPayload {
 }
 
 
-const ProtectedRoute = ({ children, role }: TProtectedRouteProps) => {
+const ProtectedRoute = ({ children, ...roles }: TProtectedRouteProps) => {
     const router = useRouter()
     const token = useAppSelector(useCurrentToken);
 
@@ -28,8 +28,12 @@ const ProtectedRoute = ({ children, role }: TProtectedRouteProps) => {
     }
     const decodedToken = jwtDecode(token) as CustomJwtPayload;
 
-    if (decodedToken?.role !== role) {
-        return router.push("/")
+    // if (decodedToken?.role !== roles) {
+    //     return router.push("/")
+    // }
+    if (roles && Array.isArray(roles) && roles.includes(decodedToken?.role)) {
+        console.log("object");
+        return router.push("/");
     }
 
     return children;

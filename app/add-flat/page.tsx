@@ -94,7 +94,7 @@ const AddFlat = () => {
     }
 
     return (
-        <ProtectedRoute>
+        <ProtectedRoute roles={["USER", "ADMIN"]}>
             <div className="bg-[#F8F8F8] container mt-20 mb-28 p-3 md:p-5 lg:p-8 rounded-2xl">
                 <h1 className="md:text-xl lg:text-3xl text-center font-medium md:font-semibold">Add New Flat</h1>
                 <form className="space-y-2 md:space-y-4 pt-4 pb-2" onSubmit={handleSubmit(onSubmit)}>
